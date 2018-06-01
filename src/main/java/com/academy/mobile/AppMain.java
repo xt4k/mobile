@@ -1,5 +1,6 @@
 package com.academy.mobile;
 
+import com.academy.mobile.dao.ConnectionManager;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.WebAppContext;
@@ -61,5 +62,11 @@ public class AppMain {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void valueOF(String str) {
+    }
+
+    private static void valueOF(char str) {
     }
 }

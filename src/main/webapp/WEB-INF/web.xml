@@ -40,10 +40,19 @@
     </welcome-file-list>
     <servlet>
         <servlet-name>homePage</servlet-name>
-        <servlet-class>com.academy.mobile.servlets.AbonentsServlet</servlet-class>
+        <servlet-class>com.academy.mobile.servlets.SubscriberListServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>homePage</servlet-name>
-        <url-pattern>/abonents</url-pattern>
+        <url-pattern>/subscribers</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SubscriberEdit</servlet-name>
+        <servlet-class>com.academy.mobile.servlets.SubscriberEditServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SubscriberEdit</servlet-name>
+        <url-pattern>/subscriber/add</url-pattern>
+    </servlet-mapping>
+
 </web-app>

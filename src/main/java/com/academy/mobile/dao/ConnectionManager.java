@@ -1,11 +1,7 @@
-package com.academy.mobile;
+package com.academy.mobile.dao;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionManager implements AutoCloseable {
@@ -18,7 +14,7 @@ public class ConnectionManager implements AutoCloseable {
 
     private Connection conn;
 
-    public ConnectionManager(Properties prop) throws ClassNotFoundException, SQLException {
+    public ConnectionManager(Properties prop) throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
         conn = DriverManager.getConnection(String.format("jdbc:mysql://%s:%s/%s%s",
                 prop.getProperty(HOST), prop.getProperty(PORT), prop.getProperty(DB), prop.getProperty(PARAMS)),
