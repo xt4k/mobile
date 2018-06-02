@@ -47,12 +47,29 @@
         <url-pattern>/subscribers</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>SubscriberAdd</servlet-name>
+        <servlet-class>com.academy.mobile.servlets.SubscriberAddServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SubscriberAdd</servlet-name>
+        <url-pattern>/subscriber/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SubscriberDelete</servlet-name>
+        <servlet-class>com.academy.mobile.servlets.SubscriberDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SubscriberDelete</servlet-name>
+        <url-pattern>/subscriber/del</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>SubscriberEdit</servlet-name>
         <servlet-class>com.academy.mobile.servlets.SubscriberEditServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SubscriberEdit</servlet-name>
-        <url-pattern>/subscriber/add</url-pattern>
+        <url-pattern>/subscriber/edit</url-pattern>
     </servlet-mapping>
 
 </web-app>

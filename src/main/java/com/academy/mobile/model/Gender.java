@@ -25,7 +25,11 @@ public enum Gender {
         }
     }
 
-    public String getRu() {
-        return Character.toString(ru);
+    public char getRu() {
+        return ru;
+    }
+
+    public char getEng() {
+        return eng;
     }
 }

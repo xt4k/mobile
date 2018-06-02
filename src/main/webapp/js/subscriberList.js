@@ -3,7 +3,22 @@ var clickAdd = function() {
 }
 
 var clickDel = function() {
-    alert("del");
+    var idList = [];
+    jQuery("input:checked[name='selCheckBox']").each(function() {
+        idList.push(this.id);
+    });
+
+    console.log(idList);
+
+    $("#ids").val(idList);
+    $("#del-form").submit();
+
+//    $.post("/subscriber/del", {id: idList},
+//        function(returnedData){
+//             window.location.reload();
+//    }).fail(function(){
+//          console.log("error deletion");
+//    });
 }
 
 var onLoad = function() {

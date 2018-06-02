@@ -46,4 +46,30 @@ public class Subscriber {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+
+    // Builder
+    public Subscriber withId(long id) {
+        this.id = id;
+        return this;
+    }
+
+    public Subscriber withFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public Subscriber withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public Subscriber withGender(Gender gender) {
+        this.gender = gender;
+        return this;
+    }
+
+    public Subscriber withAge(int age) {
+        this.age = age;
+        return this;
+    }
 }
