@@ -1,8 +1,12 @@
 package com.academy.mobile.model;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+
+@XmlEnum()
 public enum Gender {
-    MALE('m', 'м'),
-    FEMALE('f', 'ж');
+    @XmlEnumValue("m")MALE('m', 'м'),
+    @XmlEnumValue("f")FEMALE('f', 'ж');
 
     private char eng;
     private char ru;

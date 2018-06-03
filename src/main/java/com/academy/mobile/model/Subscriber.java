@@ -1,5 +1,11 @@
 package com.academy.mobile.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "subscriber")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Subscriber {
     private long id;
     private String firstName;

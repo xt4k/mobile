@@ -64,14 +64,21 @@ public class SubscriberDAO {
         }
     }
 
-    public void insert(Subscriber subscriber) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSERT_SUBSCRIBER);) {
+    public long insert(Subscriber subscriber) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSERT_SUBSCRIBER, Statement.RETURN_GENERATED_KEYS);) {
             preparedStatement.setString(1, subscriber.getFirstName());
             preparedStatement.setString(2, subscriber.getLastName());
             preparedStatement.setString(3, Character.toString(subscriber.getGender().getEng()));
             preparedStatement.setInt(4, subscriber.getAge());
 
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
+            ResultSet keys = preparedStatement.getGeneratedKeys();
+
+            keys.next();
+            long id = keys.getLong(1);
+            keys.close();
+            return id;
+
         } catch (SQLException e) {
             throw new DAOException("Can't find entity", e);
         }
@@ -87,7 +94,13 @@ public class SubscriberDAO {
         }
     }
 
-    public void update(Subscriber subscriber) {
+    public void delete(long id) {
+        Collection<Long> idList = new ArrayList<>();
+        idList.add(id);
+        deleteAll(idList);
+    }
+
+    public Subscriber update(Subscriber subscriber) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(QUERY_UPDATE_SUBSCRIBER)) {
             preparedStatement.setString(1, subscriber.getFirstName());
             preparedStatement.setString(2, subscriber.getLastName());
@@ -95,7 +108,9 @@ public class SubscriberDAO {
             preparedStatement.setInt(4, subscriber.getAge());
             preparedStatement.setLong(5, subscriber.getId());
 
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
+
+            return getById(subscriber.getId());
         } catch (SQLException e) {
             throw new DAOException("Can't find entity", e);
         }

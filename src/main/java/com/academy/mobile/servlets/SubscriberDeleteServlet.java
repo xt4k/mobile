@@ -18,7 +18,7 @@ public class SubscriberDeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        try(ConnectionManager connectionManager = new ConnectionManager(PropertyManager.getInstance().getProperties());) {
+        try(ConnectionManager connectionManager = new ConnectionManager(PropertyManager.getInstance().getProperties())) {
             if (!req.getParameter("ids").isEmpty()) {
                 String[] idArr = req.getParameter("ids").split(",");
                 List<Long> idList = new ArrayList<>();
