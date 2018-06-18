@@ -19,8 +19,11 @@ public class AppMain {
         Properties prop = new Properties();
         prop.load(new FileReader(new File(System.getProperty("cfg", "src/main/resources/cfg.properties"))));
         Server server = new Server(Integer.parseInt(prop.getProperty("jetty.port")));
-        String rootPath = AppMain.class.getClassLoader().getResource(".").toString();
-        WebAppContext webapp = new WebAppContext(rootPath + "../../src/main/webapp", "");
+        System.out.println(System.getProperty("user.dir"));
+//        String rootPath = AppMain.class.getClassLoader().getResource(".").toString();
+        String rootPath = System.getProperty("user.dir");
+        System.out.println(rootPath);
+        WebAppContext webapp = new WebAppContext(rootPath + "/src/main/webapp", "");
         /****** JSP SUPPORT ADD TO JETTY ****/
         Configuration.ClassList classlist = org.eclipse.jetty.webapp.Configuration.ClassList
                 .setServerDefault(server);

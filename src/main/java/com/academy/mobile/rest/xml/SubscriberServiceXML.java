@@ -1,4 +1,4 @@
-package com.academy.mobile.rest;
+package com.academy.mobile.rest.xml;
 
 import com.academy.mobile.PropertyManager;
 import com.academy.mobile.dao.ConnectionManager;
@@ -13,7 +13,7 @@ import java.sql.Connection;
 import java.util.Collection;
 
 @Path("/subscribers")
-public class SubscriberService {
+public class SubscriberServiceXML {
 
     @GET
 //    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
