@@ -8,7 +8,7 @@
     <artifactId>mobile</artifactId>
     <version>1.0</version>
 
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -93,31 +93,36 @@
             <artifactId>json</artifactId>
             <version>${json.version}</version>
         </dependency>
-
     </dependencies>
 
-    <!--<build>-->
-        <!--<plugins>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-war-plugin</artifactId>-->
-                <!--<version>2.1.1</version>-->
-                <!--<configuration>-->
-                    <!--<archive>-->
-                        <!--<manifestEntries>-->
-                            <!--<Main-Class>com.academy.mobile.AppMain</Main-Class>-->
-                            <!--<version>${project.version}</version>-->
-                        <!--</manifestEntries>-->
-                    <!--</archive>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-                <!--<groupId>org.eclipse.jetty</groupId>-->
-                <!--<artifactId>jetty-maven-plugin</artifactId>-->
-                <!--<version>${jetty.version}</version>-->
-            <!--</plugin>-->
-        <!--</plugins>-->
-
-    <!--</build>-->
+    <profiles>
+        <profile>
+            <id>build</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>assembly</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <configuration>
+                                    <appendAssemblyId>false</appendAssemblyId>
+                                    <finalName>${project.artifactId}-${project.version}</finalName>
+                                    <descriptors>
+                                        <descriptor>src/main/assembly/assembly.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
