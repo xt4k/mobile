@@ -11,11 +11,12 @@ public class ConnectionManager implements AutoCloseable {
     private static final String USER = "jdbc.user";
     private static final String PASSWORD = "jdbc.password";
     private static final String PARAMS = "jdbc.params";
+    private static final String DRIVER = "jdbc.driver";
 
     private Connection conn;
 
     public ConnectionManager(Properties prop) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        Class.forName(prop.getProperty(DRIVER));
         conn = DriverManager.getConnection(String.format("jdbc:mysql://%s:%s/%s%s",
                 prop.getProperty(HOST), prop.getProperty(PORT), prop.getProperty(DB), prop.getProperty(PARAMS)),
                 prop.getProperty(USER), prop.getProperty(PASSWORD));
