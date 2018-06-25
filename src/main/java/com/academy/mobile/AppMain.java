@@ -8,22 +8,33 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
 public class AppMain {
+    private static final String DEF_CFG_PATH="src/main/resources/cfg.properties";
+    private static final String DEF_WEBAPP_PATH="/src/main/webapp";
+
     public static void main(String[] args) throws Exception {
         System.out.println("*** Demo of mobile ***");
+
         Properties prop = new Properties();
-        prop.load(new FileReader(new File(System.getProperty("cfg", "src/main/resources/cfg.properties"))));
-        Server server = new Server(Integer.parseInt(prop.getProperty("jetty.port")));
-        System.out.println(System.getProperty("user.dir"));
-//        String rootPath = AppMain.class.getClassLoader().getResource(".").toString();
+
+        String cfgPath = System.getProperty("cfg", DEF_CFG_PATH);
         String rootPath = System.getProperty("user.dir");
-        System.out.println(rootPath);
-        WebAppContext webapp = new WebAppContext(rootPath + "/src/main/webapp", "");
+        String webApp = System.getProperty("webapp", DEF_WEBAPP_PATH);
+
+        prop.load(new FileReader(new File(cfgPath)));
+        int port = Integer.parseInt(prop.getProperty("jetty.port"));
+
+        Server server = new Server(port);
+
+        WebAppContext webapp = new WebAppContext(new File(rootPath + webApp).getCanonicalPath(), "");
         /****** JSP SUPPORT ADD TO JETTY ****/
         Configuration.ClassList classlist = org.eclipse.jetty.webapp.Configuration.ClassList
                 .setServerDefault(server);

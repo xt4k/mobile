@@ -9,6 +9,13 @@
     <fileSets>
         <fileSet>
             <directory>src/main/resources</directory>
+            <outputDirectory>dump</outputDirectory>
+            <includes>
+                <include>*.sql</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources</directory>
             <outputDirectory>cfg</outputDirectory>
             <includes>
                 <include>*.properties</include>
@@ -24,7 +31,7 @@
         </fileSet>
         <fileSet>
             <directory>src/main/webapp</directory>
-            <outputDirectory>src/main/webapp</outputDirectory>
+            <outputDirectory>webapp</outputDirectory>
         </fileSet>
     </fileSets>
     <dependencySets>
