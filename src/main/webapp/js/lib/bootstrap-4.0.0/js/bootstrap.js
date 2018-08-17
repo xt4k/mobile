@@ -81,7 +81,7 @@ var Util = function ($) {
       return false;
     }
 
-    var el = document.createElement('bootstrap');
+    var el = document.createElement('bootstrap-4.0.0');
 
     for (var name in TransitionEndEvent) {
       if (el.style[name] !== undefined) {

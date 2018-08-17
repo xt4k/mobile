@@ -9,13 +9,6 @@
     <fileSets>
         <fileSet>
             <directory>src/main/resources</directory>
-            <outputDirectory>dump</outputDirectory>
-            <includes>
-                <include>*.sql</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>src/main/resources</directory>
             <outputDirectory>cfg</outputDirectory>
             <includes>
                 <include>*.properties</include>
@@ -28,10 +21,6 @@
                 <include>*.bat</include>
                 <include>*.sh</include>
             </includes>
-        </fileSet>
-        <fileSet>
-            <directory>src/main/webapp</directory>
-            <outputDirectory>webapp</outputDirectory>
         </fileSet>
     </fileSets>
     <dependencySets>

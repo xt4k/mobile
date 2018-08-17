@@ -1,2 +1,2 @@
 #!/bin/sh
-java -Dcfg=../cfg/cfg.properties -cp -Dwebapp=/../webapp ../lib/*  com.academy.mobile.AppMain
+java ../lib/*  com.academy.mobile.Application --spring.config.location=file:../cfg/application.properties

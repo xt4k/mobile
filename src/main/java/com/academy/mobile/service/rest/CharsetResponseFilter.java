@@ -1,4 +1,4 @@
-package com.academy.mobile.rest;
+package com.academy.mobile.service.rest;
 
 import com.sun.jersey.spi.container.ContainerRequest;
 import com.sun.jersey.spi.container.ContainerResponse;

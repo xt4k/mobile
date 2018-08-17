@@ -77,11 +77,11 @@
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>com.academy.mobile.rest.xml</param-value>
+            <param-value>com.academy.mobile.service.rest.xml</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.spi.container.ContainerResponseFilters</param-name>
-            <param-value>com.academy.mobile.rest.CharsetResponseFilter</param-value>
+            <param-value>com.academy.mobile.service.rest.CharsetResponseFilter</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -95,11 +95,11 @@
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>com.academy.mobile.rest.json</param-value>
+            <param-value>com.academy.mobile.service.rest.json</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.spi.container.ContainerResponseFilters</param-name>
-            <param-value>com.academy.mobile.rest.CharsetResponseFilter</param-value>
+            <param-value>com.academy.mobile.service.rest.CharsetResponseFilter</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>

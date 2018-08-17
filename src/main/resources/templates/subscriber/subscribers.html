@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Subscribers</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/css/lib/bootstrap-4.0.0/bootstrap.min.css"/>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="/js/lib/bootstrap-4.0.0/bootstrap.min.js"></script>
+    <script src="/js/lib/jquery/jquery-3.3.1.min.js"></script>
+
+    <script type="text/javascript" src="/js/subscriber/subscribers.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>Subscribers</h3>
+        </div>
+    </div>
+    <div class="row">
+        <a class="btn btn-link" href="/">Home</a>
+    </div>
+    <div class="row">
+        <div class="btn-group">
+            <div>
+                <input id="add" class="btn btn-success" type="button" value="add"/>
+                <input id="del" class="btn btn-danger" type="button" value="delete"/>
+                <form id="del-form" action="subscriber/del" method="Post">
+                    <input id="ids" name="ids" type="hidden" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+                <!--<c:if test="${not empty subscribers}">-->
+                                <table class="table table-hover table-bordered table-striped"  border="1" cellpadding="8" cellspacing="0">
+                                    <thead style="background-color: #dff0d8;">
+                                        <tr>
+                                            <th></th>
+                                            <th>id</th>
+                                            <th>Имя</th>
+                                            <th>Фамилия</th>
+                                            <th>Возраст</th>
+                                            <th>Пол</th>
+                                        </tr>
+                                    </thead>
+                                    <!--<c:forEach items="${subscribers}" var="subscriber">-->
+                                        <tr  th:each="subscriber: ${subscribers}">
+                                            <td>
+                                                <input type="checkbox" th:id="${subscriber.id}" name="selCheckBox"/>
+                                            </td>
+                                            <td>
+                                                <a class="link" th:href="subscriber/edit?id=${subscriber.id}" name="contact-edit-id" id="contact-edit-id" title="Редактировать контакт" th:text="${subscriber.id}"></a>
+                                                                                         </td>
+                                            <td th:text="${subscriber.firstName}"></td>
+                                            <td th:text="${subscriber.lastName}"></td>
+                                            <td th:text="${subscriber.age}"></td>
+                                            <td th:text="${subscriber.gender}"></td>
+                                        </tr>
+                                    <!--</c:forEach>-->
+                                </table>
+                           <!-- </c:if> -->
+        </div>
+    </div>
+</div>
+</body>
+</html>

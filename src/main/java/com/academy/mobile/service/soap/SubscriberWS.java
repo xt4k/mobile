@@ -1,4 +1,4 @@
-package com.academy.mobile.soap;
+package com.academy.mobile.service.soap;
 
 import com.academy.mobile.model.Subscriber;
 
@@ -22,5 +22,5 @@ public interface SubscriberWS {
     void removeSubscriber(long id);
 
     @WebMethod
-    Subscriber updateSubsriber(long id, Subscriber subscriber);
+    Subscriber updateSubscriber(long id, Subscriber subscriber);
 }
