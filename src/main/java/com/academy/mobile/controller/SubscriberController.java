@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class SubscriberController {
 
@@ -19,6 +22,7 @@ public class SubscriberController {
     @RequestMapping(value = "/subscribers", method = RequestMethod.GET)
     public String subscribers(Model model) {
         model.addAttribute("subscribers", subscriberService.findAll());
+        model.addAttribute("idList", new ArrayList<Long>());
         return "/subscriber/subscribers";
     }
 
@@ -30,18 +34,28 @@ public class SubscriberController {
 
     @RequestMapping(value = "/subscriber/add", method = RequestMethod.POST)
     public String createSubscriber(@ModelAttribute("subscriberForm") Subscriber subscriberForm, BindingResult bindingResult) {
-//        LOG.info("Try register a new user '{}'", userForm.getUsername());
-//        userValidator.validate(userForm, bindingResult);
-
-//        if (bindingResult.hasErrors()) {
-//            LOG.info("Reject of creation user '{}' - not valid form data", userForm.getUsername());
-//            return "registration";
-//        }
-
         subscriberService.save(subscriberForm);
-//        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
+        return "redirect:/subscribers";
+    }
 
-//        LOG.info("The user '{}' registered successful", userForm.getUsername());
+    // TODO id = error handling
+    @RequestMapping(value = "/subscriber/edit", method = RequestMethod.GET)
+    public String subscriberEditForm(Model model, Long id) {
+        model.addAttribute("subscriberForm", subscriberService.getById(id));
+        return "/subscriber/subscriberEdit";
+    }
+
+    @RequestMapping(value = "/subscriber/edit", method = RequestMethod.POST)
+    // TODO check if exists
+    public String editSubscriber(@ModelAttribute("subscriberForm") Subscriber subscriberForm, BindingResult bindingResult) {
+        subscriberService.save(subscriberForm);
+        return "redirect:/subscribers";
+    }
+
+    @RequestMapping(value = "/subscriber/del", method = RequestMethod.POST)
+    // TODO check if exists
+    public String deleteSubscribers(@ModelAttribute("idList") List<Long> idList, BindingResult bindingResult) {
+        idList.forEach(subscriberService::remove);
         return "redirect:/subscribers";
     }
 }

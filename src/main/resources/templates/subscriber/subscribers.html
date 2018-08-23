@@ -31,42 +31,38 @@
             <div>
                 <input id="add" class="btn btn-success" type="button" value="add"/>
                 <input id="del" class="btn btn-danger" type="button" value="delete"/>
-                <form id="del-form" action="subscriber/del" method="Post">
-                    <input id="ids" name="ids" type="hidden" />
+                <form id="del-form" th:object="${idList}" th:action="@{/subscriber/del}" method="Post">
+                    <input id="id-list" th:name="idList" type="hidden" />
                 </form>
             </div>
         </div>
     </div>
     <div class="row">
         <div>
-                <!--<c:if test="${not empty subscribers}">-->
-                                <table class="table table-hover table-bordered table-striped"  border="1" cellpadding="8" cellspacing="0">
-                                    <thead style="background-color: #dff0d8;">
-                                        <tr>
-                                            <th></th>
-                                            <th>id</th>
-                                            <th>Имя</th>
-                                            <th>Фамилия</th>
-                                            <th>Возраст</th>
-                                            <th>Пол</th>
-                                        </tr>
-                                    </thead>
-                                    <!--<c:forEach items="${subscribers}" var="subscriber">-->
-                                        <tr  th:each="subscriber: ${subscribers}">
-                                            <td>
-                                                <input type="checkbox" th:id="${subscriber.id}" name="selCheckBox"/>
-                                            </td>
-                                            <td>
-                                                <a class="link" th:href="subscriber/edit?id=${subscriber.id}" name="contact-edit-id" id="contact-edit-id" title="Редактировать контакт" th:text="${subscriber.id}"></a>
-                                                                                         </td>
-                                            <td th:text="${subscriber.firstName}"></td>
-                                            <td th:text="${subscriber.lastName}"></td>
-                                            <td th:text="${subscriber.age}"></td>
-                                            <td th:text="${subscriber.gender}"></td>
-                                        </tr>
-                                    <!--</c:forEach>-->
-                                </table>
-                           <!-- </c:if> -->
+            <table class="table table-hover table-bordered table-striped"  border="1" cellpadding="8" cellspacing="0">
+                <thead style="background-color: #dff0d8;">
+                <tr>
+                    <th></th>
+                    <th>id</th>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Возраст</th>
+                    <th>Пол</th>
+                </tr>
+                </thead>
+                <tr  th:each="subscriber: ${subscribers}">
+                    <td>
+                        <input type="checkbox" th:id="${subscriber.id}" name="selCheckBox"/>
+                    </td>
+                    <td>
+                        <a class="link" th:href="@{subscriber/edit(id=${subscriber.id})}" name="contact-edit-id" id="contact-edit-id" title="Редактировать контакт" th:text="${subscriber.id}"></a>
+                    </td>
+                    <td th:text="${subscriber.firstName}"></td>
+                    <td th:text="${subscriber.lastName}"></td>
+                    <td th:text="${subscriber.age}"></td>
+                    <td th:text="${subscriber.gender.ru}"></td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

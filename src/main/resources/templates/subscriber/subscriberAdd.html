@@ -3,80 +3,80 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <html>
-    <head>
-        <title>Creation of Subscriber</title>
+<head>
+    <title>Creation of Subscriber</title>
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="/css/lib/bootstrap-4.0.0/bootstrap.min.css"/>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/css/lib/bootstrap-4.0.0/bootstrap.min.css"/>
 
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="/js/lib/bootstrap-4.0.0/bootstrap.min.js"></script>
-        <script src="/js/lib/jquery/jquery-3.3.1.min.js"></script>
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h3>Заполните все поля для создания абонента</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <a class="btn btn-link" href="/">Home</a>
-                </div>
-            </div>
-            
-            <form  th:object="${subscriberForm}" th:action="@{/subscriber/add}"  th:method="post">
-                <div class="row">
-                    <div class="col"> 
-                        <table class="table table-borderless">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <label>Имя:</label>
-                                    </td>
-                                    <td>
-                                        <input id="fname" type="text" th:name="firstName" th:field="*{firstName}"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>Фамилия:</label>
-                                    </td>
-                                    <td>
-                                         <input id="lname" type="text" th:name="lastName" th:field="*{lastName}"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>Пол:</label>
-                                    </td>
-                                    <td>
-                                        <input type="radio" id="male" th:name="gender" th:field="*{gender}" th:value="m" checked>
-                                        <label for="male">м</label>
-
-                                        <input type="radio" id="female" th:name="gender" th:field="*{gender}" th:value="f">
-                                        <label for="female">ж</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>Возраст:</label>
-                                    </td>
-                                    <td>
-                                        <input id="age" type="text" th:name="age" th:field="*{age}" th:value="m" pattern="[0-9.]+" >
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col"></div>
-                </div>
-                <button type="submit" class="btn btn-success">Создать</button>             
-            </form>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="/js/lib/bootstrap-4.0.0/bootstrap.min.js"></script>
+    <script src="/js/lib/jquery/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>Заполните все поля для создания абонента</h3>
         </div>
-    </body>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-link" href="/">Home</a>
+        </div>
+    </div>
+
+    <form  th:object="${subscriberForm}" th:action="@{/subscriber/add}"  th:method="post">
+        <div class="row">
+            <div class="col">
+                <table class="table table-borderless">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <label>Имя:</label>
+                        </td>
+                        <td>
+                            <input id="fname" type="text" th:name="firstName" th:field="*{firstName}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Фамилия:</label>
+                        </td>
+                        <td>
+                            <input id="lname" type="text" th:name="lastName" th:field="*{lastName}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Пол:</label>
+                        </td>
+                        <td>
+                            <span th:each="state : ${T(com.academy.mobile.model.Gender).values()}">
+                                <input th:type="radio" th:id="${state}" th:name="gender" th:value="${state}"
+                                       th:checked="${state == T(com.academy.mobile.model.Gender).MALE}  ? 'checked'" />
+                                <label th:for="${state}" th:text="${state.ru}"></label>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Возраст:</label>
+                        </td>
+                        <td>
+                            <input id="age" type="text" th:name="age" th:field="*{age}" th:value="m" pattern="[0-9.]+" >
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col"></div>
+        </div>
+        <button type="submit" class="btn btn-success">Создать</button>
+    </form>
+</div>
+</body>
 </html>

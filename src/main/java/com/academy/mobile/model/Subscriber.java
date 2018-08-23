@@ -1,12 +1,10 @@
 package com.academy.mobile.model;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-@XmlRootElement(name = "subscriber")
-@XmlAccessorType(XmlAccessType.FIELD)
+import javax.persistence.*;
+
+@JacksonXmlRootElement(localName = "subscriber")
 @Table
 @Entity(name="subscriber")
 public class Subscriber {
@@ -14,9 +12,20 @@ public class Subscriber {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Column(nullable=false)
     private String firstName;
+
+    @Column(nullable=false)
     private String lastName;
+
+    @Column(nullable=false)
     private int age;
+
+    @Column(nullable=false)
+    @Convert(converter=GenderConverter.class)
+    // TODO
+//    @Check(constraints = "gender in ('m', 'f')")
     private Gender gender;
 
     public long getId() {

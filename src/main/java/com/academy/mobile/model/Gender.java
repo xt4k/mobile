@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlEnumValue;
 
 @XmlEnum()
 public enum Gender {
+
     @XmlEnumValue("m")MALE('m', 'м'),
     @XmlEnumValue("f")FEMALE('f', 'ж');
 

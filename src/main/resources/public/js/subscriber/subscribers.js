@@ -10,7 +10,7 @@ var clickDel = function() {
 
     console.log(idList);
 
-    $("#ids").val(idList);
+    $("#id-list").val(idList);
     $("#del-form").submit();
 
 //    $.post("/subscriber/del", {id: idList},
@@ -22,7 +22,7 @@ var clickDel = function() {
 }
 
 var onLoad = function() {
- console.log("hello");
+ console.log("onLoad");
  $("#add").click(clickAdd);
  $("#del").click(clickDel);
 };

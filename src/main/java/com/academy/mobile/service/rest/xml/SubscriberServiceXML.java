@@ -1,80 +1,75 @@
 package com.academy.mobile.service.rest.xml;
 
 import com.academy.mobile.model.Subscriber;
+import com.academy.mobile.model.Subscribers;
 import com.academy.mobile.service.db.SubscriberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.net.URI;
-import java.util.Collection;
 
-@Path("/subscribers")
+@RestController
+@RequestMapping("/rest/xml/subscribers")
 public class SubscriberServiceXML {
 
     @Autowired
     private SubscriberService subscriberService;
 
-    @GET
-//    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    @Produces({ MediaType.APPLICATION_XML })
-    public Collection<Subscriber> getSubscribers() {
-        return subscriberService.findAll();
+    @GetMapping(produces = { MediaType.APPLICATION_XML })
+    public Subscribers getSubscribers() {
+        return new Subscribers(subscriberService.findAll());
     }
 
-    @GET
-    @Path("/{id}")
-//    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    @Produces({ MediaType.APPLICATION_XML })
-    public Subscriber getSubscriber(@PathParam("id") long id) {
+    @GetMapping(path="/{id}", produces = { MediaType.APPLICATION_XML })
+    public Subscriber getSubscriber(@PathVariable long id) {
         return subscriberService.getById(id);
     }
 
-    @POST
-    @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public Response addSubscriber(Subscriber subscriber) {
+    @PostMapping
+    public ResponseEntity<?> addSubscriber(@RequestBody Subscriber subscriber) {
         try {
             long id = subscriberService.save(subscriber).getId();
-            return Response.created(new URI(String.valueOf(id))).build();
+            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                    .buildAndExpand(id).toUri();
+            return ResponseEntity.created(location).build();
         } catch (Exception e) {
             e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return Response.status(500).build();
     }
 
-    @PUT
-    @Path("/{id}")
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public Subscriber updateSubscriber(Subscriber subscriber) {
+    @PutMapping("/{id}")
+    public Subscriber updateSubscriber(@PathVariable("id") long id,  @RequestBody  Subscriber subscriber) {
         return subscriberService.save(subscriber);
     }
 
-    @DELETE
-    @Path("/{id}")
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public Response deleteSubscriber(@PathParam("id") long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteSubscriber(@PathVariable("id") long id) {
         try {
             subscriberService.remove(id);
-            return Response.ok().build();
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return Response.status(500).build();
     }
 
-    @DELETE
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    // TODO
-    public Response deleteAllSubscribers() {
+    @DeleteMapping
+    public ResponseEntity<?> deleteAllSubscribers() {
         try {
             System.out.println("delete all");
-            //subscriberDAO.deleteAll(id);
-            return Response.ok().build();
+            subscriberService.findAll().stream()
+                    .mapToLong(Subscriber::getId)
+                    .forEach(subscriberService::remove);
+
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return Response.status(500).build();
     }
 }
