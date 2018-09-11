@@ -63,9 +63,16 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!--rest-xml-->
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
+
+        <!--soap-->
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
         </dependency>
 
         <dependency>
@@ -104,7 +111,6 @@
             <artifactId>json</artifactId>
             <version>${json.version}</version>
         </dependency>
-
     </dependencies>
 
     <profiles>

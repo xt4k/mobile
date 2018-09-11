@@ -4,6 +4,7 @@ import com.academy.mobile.model.Subscriber;
 import com.academy.mobile.service.db.SubscriberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -18,17 +19,17 @@ public class SubscriberServiceJSON {
     @Autowired
     private SubscriberService subscriberService;
 
-    @GetMapping(produces = { "application/json" })
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<Subscriber> getSubscribers() {
         return subscriberService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Subscriber getSubscriber(@PathVariable long id) {
         return subscriberService.getById(id);
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addSubscriber(@RequestBody Subscriber subscriber) {
 
         try {
@@ -43,7 +44,7 @@ public class SubscriberServiceJSON {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Subscriber updateSubscriber(@PathVariable("id") long id, @RequestBody Subscriber subscriber) {
         if (subscriberService.getById(id) == null)
             return null;

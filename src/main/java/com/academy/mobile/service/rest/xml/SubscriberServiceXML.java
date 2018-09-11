@@ -29,7 +29,7 @@ public class SubscriberServiceXML {
         return subscriberService.getById(id);
     }
 
-    @PostMapping
+    @PostMapping(consumes = { MediaType.APPLICATION_XML })
     public ResponseEntity<?> addSubscriber(@RequestBody Subscriber subscriber) {
         try {
             long id = subscriberService.save(subscriber).getId();
@@ -42,7 +42,7 @@ public class SubscriberServiceXML {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(path= "/{id}", consumes = { MediaType.APPLICATION_XML })
     public Subscriber updateSubscriber(@PathVariable("id") long id,  @RequestBody  Subscriber subscriber) {
         return subscriberService.save(subscriber);
     }
