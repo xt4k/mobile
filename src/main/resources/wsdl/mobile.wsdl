@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:tns="http://soap.service.mobile.academy.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://soap.service.mobile.academy.com/" name="SubscriberWSImplService">
+    <!--xsd types-->
+    <wsdl:types>
+        <xs:schema targetNamespace="http://soap.service.mobile.academy.com">
+            <xs:element name="addSubscriber" type="tns:addSubscriber"/>
+            <xs:element name="addSubscriberResponse" type="tns:addSubscriberResponse"/>
+            <xs:element name="getSubscriber" type="tns:getSubscriber"/>
+            <xs:element name="getSubscriberResponse" type="tns:getSubscriberResponse"/>
+            <xs:element name="getSubscribers" type="tns:getSubscribers"/>
+            <xs:element name="getSubscribersResponse" type="tns:getSubscribersResponse"/>
+            <xs:element name="removeSubscriber" type="tns:removeSubscriber"/>
+            <xs:element name="removeSubscriberResponse" type="tns:removeSubscriberResponse"/>
+            <xs:element name="subscriber" type="tns:subscriber"/>
+            <xs:element name="updateSubsriber" type="tns:updateSubsriber"/>
+            <xs:element name="updateSubsriberResponse" type="tns:updateSubsriberResponse"/>
+            <xs:complexType name="addSubscriber">
+                <xs:sequence>
+                    <xs:element name="arg0" type="tns:subscriber" minOccurs="0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="subscriber">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                    <xs:element name="firstName" type="xs:string" minOccurs="0"/>
+                    <xs:element name="lastName" type="xs:string" minOccurs="0"/>
+                    <xs:element name="age" type="xs:int"/>
+                    <xs:element name="gender" type="tns:gender" minOccurs="0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="addSubscriberResponse">
+                <xs:sequence>
+                    <xs:element name="return" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="updateSubsriber">
+                <xs:sequence>
+                    <xs:element name="arg0" type="xs:long"/>
+                    <xs:element name="arg1" type="tns:subscriber" minOccurs="0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="updateSubsriberResponse">
+                <xs:sequence>
+                    <xs:element name="return" type="tns:subscriber" minOccurs="0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="removeSubscriber">
+                <xs:sequence>
+                    <xs:element name="arg0" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="removeSubscriberResponse">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="getSubscriber">
+                <xs:sequence>
+                    <xs:element name="arg0" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getSubscriberResponse">
+                <xs:sequence>
+                    <xs:element name="return" type="tns:subscriber" minOccurs="0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getSubscribers">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="getSubscribersResponse">
+                <xs:sequence>
+                    <xs:element name="return" type="tns:subscriber" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:simpleType name="gender">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="m"/>
+                    <xs:enumeration value="f"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:schema>
+    </wsdl:types>
+
+    <!--Define input and output parameters -->
+    <wsdl:message name="removeSubscriber">
+        <wsdl:part name="parameters" element="tns:removeSubscriber"/>
+    </wsdl:message>
+    <wsdl:message name="removeSubscriberResponse">
+        <wsdl:part name="parameters" element="tns:removeSubscriberResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getSubscribers">
+        <wsdl:part name="parameters" element="tns:getSubscribers"/>
+    </wsdl:message>
+    <wsdl:message name="getSubscribersResponse">
+        <wsdl:part name="parameters" element="tns:getSubscribersResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getSubscriber">
+        <wsdl:part name="parameters" element="tns:getSubscriber"/>
+    </wsdl:message>
+    <wsdl:message name="getSubscriberResponse">
+        <wsdl:part name="parameters" element="tns:getSubscriberResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addSubscriber">
+        <wsdl:part name="parameters" element="tns:addSubscriber"/>
+    </wsdl:message>
+    <wsdl:message name="addSubscriberResponse">
+        <wsdl:part name="parameters" element="tns:addSubscriberResponse"/>
+    </wsdl:message>
+    <wsdl:message name="updateSubsriber">
+        <wsdl:part name="parameters" element="tns:updateSubsriber"/>
+    </wsdl:message>
+    <wsdl:message name="updateSubsriberResponse">
+        <wsdl:part name="parameters" element="tns:updateSubsriberResponse"/>
+    </wsdl:message>
+
+    <!--Define port definition -->
+    <wsdl:portType name="SubscriberWSImpl">
+        <wsdl:operation name="removeSubscriber">
+            <wsdl:input  message="tns:removeSubscriber"/>
+            <wsdl:output message="tns:removeSubscriberResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getSubscribers">
+            <wsdl:input  message="tns:getSubscribers"/>
+            <wsdl:output message="tns:getSubscribersResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getSubscriber">
+            <wsdl:input  message="tns:getSubscriber"/>
+            <wsdl:output message="tns:getSubscriberResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addSubscriber">
+            <wsdl:input message="tns:addSubscriber"/>
+            <wsdl:output message="tns:addSubscriberResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateSubsriber">
+            <wsdl:input message="tns:updateSubsriber"/>
+            <wsdl:output message="tns:updateSubsriberResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <!--Bind Soap operation and service -->
+    <wsdl:binding name="SubscriberWSImplPortBinding" type="tns:SubscriberWSImpl">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="removeSubscriber">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getSubscribers">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getSubscriber">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addSubscriber">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateSubsriber">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <!--Define service -->
+    <service name="SubscriberWSImplService">
+        <port name="SubscriberWSImplPort" binding="tns:SubscriberWSImplPortBinding">
+            <soap:address location="http://localhost:8081/soap"/>
+        </port>
+    </service>
+</wsdl:definitions>
