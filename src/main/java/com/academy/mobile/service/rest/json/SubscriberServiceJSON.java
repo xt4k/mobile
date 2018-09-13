@@ -59,7 +59,7 @@ public class SubscriberServiceJSON {
         if (id != subscriber.getId())
             return null;
 
-        return subscriberService.save(subscriber);
+        return subscriberService.saveById(id, subscriber);
     }
 
     @DeleteMapping("/{id}")
