@@ -1,6 +1,7 @@
 package com.academy.mobile.model;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -10,7 +11,8 @@ import javax.persistence.*;
 public class Subscriber {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="myGenerator")
+    @GenericGenerator(name="myGenerator", strategy="com.academy.mobile.model.FilterIdentifierGenerator")
     private long id;
 
     @Column(nullable=false)

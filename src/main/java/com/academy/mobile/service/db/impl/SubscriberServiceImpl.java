@@ -21,7 +21,12 @@ public class SubscriberServiceImpl implements SubscriberService {
 
     @Override
     public Subscriber save(Subscriber subscriber) {
-        return subscriberRepository.save(subscriber);
+        return subscriberRepository.save(subscriber.withId(0));
+    }
+
+    @Override
+    public Subscriber saveById(long id, Subscriber subscriber) {
+        return subscriberRepository.save(subscriber.withId(id));
     }
 
     @Override

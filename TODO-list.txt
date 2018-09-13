@@ -1,0 +1,2 @@
+1) Problem with migration from MySQl to Postgres or Oracle:
+    'FilterIdentifierGenerator' has only MySQl implementation

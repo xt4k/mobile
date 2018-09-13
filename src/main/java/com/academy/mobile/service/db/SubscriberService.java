@@ -7,6 +7,7 @@ import java.util.List;
 public interface SubscriberService  {
     List<Subscriber> findAll();
     Subscriber save(Subscriber subscriber);
+    Subscriber saveById(long id, Subscriber subscriber);
     Subscriber getById(long id);
     void remove(long id);
 }

@@ -1,6 +1,7 @@
 package com.academy.mobile.service.rest.json;
 
 import com.academy.mobile.model.Subscriber;
+import com.academy.mobile.model.SubscriberNotFoundException;
 import com.academy.mobile.service.db.SubscriberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,15 +26,21 @@ public class SubscriberServiceJSON {
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Subscriber getSubscriber(@PathVariable long id) {
-        return subscriberService.getById(id);
+    public Subscriber getSubscriber(@PathVariable long id) throws SubscriberNotFoundException {
+        Subscriber subscriber = subscriberService.getById(id);
+        if (subscriber != null)
+            return subscriber;
+
+        throw new SubscriberNotFoundException();
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addSubscriber(@RequestBody Subscriber subscriber) {
 
         try {
-            long id = subscriberService.save(subscriber).getId();
+            long id = subscriber.getId() == 0L ? subscriberService.save(subscriber).getId() :
+                    subscriberService.saveById(subscriber.getId(), subscriber).getId();
+
             URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                     .buildAndExpand(id).toUri();
 
@@ -45,7 +52,7 @@ public class SubscriberServiceJSON {
     }
 
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Subscriber updateSubscriber(@PathVariable("id") long id, @RequestBody Subscriber subscriber) {
+    public Subscriber updateSubscriber(@PathVariable("id") long id, @RequestBody Subscriber subscriber) throws SubscriberNotFoundException {
         if (subscriberService.getById(id) == null)
             return null;
 

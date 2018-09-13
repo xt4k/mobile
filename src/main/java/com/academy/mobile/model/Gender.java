@@ -1,13 +1,20 @@
 package com.academy.mobile.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
 @XmlEnum()
 public enum Gender {
 
-    @XmlEnumValue("m")MALE('m', 'м'),
-    @XmlEnumValue("f")FEMALE('f', 'ж');
+    @XmlEnumValue("m")
+    @JsonProperty("m")
+    MALE('m', 'м'),
+
+    @XmlEnumValue("f")
+    @JsonProperty("f")
+    FEMALE('f', 'ж');
 
     private char eng;
     private char ru;
