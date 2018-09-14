@@ -1,6 +1,7 @@
 package com.academy.mobile.service.rest.xml;
 
 import com.academy.mobile.model.Subscriber;
+import com.academy.mobile.model.SubscriberNotFoundException;
 import com.academy.mobile.model.Subscribers;
 import com.academy.mobile.service.db.SubscriberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,20 @@ public class SubscriberServiceXML {
     }
 
     @GetMapping(path="/{id}", produces = { MediaType.APPLICATION_XML })
-    public Subscriber getSubscriber(@PathVariable long id) {
-        return subscriberService.getById(id);
+    public Subscriber getSubscriber(@PathVariable long id) throws SubscriberNotFoundException {
+        Subscriber subscriber = subscriberService.getById(id);
+        if (subscriber != null)
+            return subscriber;
+
+        throw new SubscriberNotFoundException();
     }
 
     @PostMapping(consumes = { MediaType.APPLICATION_XML })
     public ResponseEntity<?> addSubscriber(@RequestBody Subscriber subscriber) {
         try {
-            long id = subscriberService.save(subscriber).getId();
+            long id = subscriber.getId() == 0L ? subscriberService.save(subscriber).getId() :
+                    subscriberService.saveById(subscriber.getId(), subscriber).getId();
+
             URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                     .buildAndExpand(id).toUri();
             return ResponseEntity.created(location).build();
@@ -44,7 +51,7 @@ public class SubscriberServiceXML {
 
     @PutMapping(path= "/{id}", consumes = { MediaType.APPLICATION_XML })
     public Subscriber updateSubscriber(@PathVariable("id") long id,  @RequestBody  Subscriber subscriber) {
-        return subscriberService.save(subscriber);
+        return subscriberService.saveById(id, subscriber);
     }
 
     @DeleteMapping("/{id}")

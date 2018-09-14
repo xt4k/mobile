@@ -121,6 +121,9 @@
 
     <profiles>
         <profile>
+            <id>nexus</id>
+        </profile>
+        <profile>
             <id>build</id>
             <build>
                 <resources>

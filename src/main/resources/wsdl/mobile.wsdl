@@ -20,7 +20,7 @@
             <xs:element name="updateSubsriberResponse" type="tns:updateSubsriberResponse"/>
             <xs:complexType name="addSubscriber">
                 <xs:sequence>
-                    <xs:element name="arg0" type="tns:subscriber" minOccurs="0"/>
+                    <xs:element name="subscriber" type="tns:subscriber" minOccurs="0"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="subscriber">
@@ -34,23 +34,23 @@
             </xs:complexType>
             <xs:complexType name="addSubscriberResponse">
                 <xs:sequence>
-                    <xs:element name="return" type="xs:long"/>
+                    <xs:element name="id" type="xs:long"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="updateSubsriber">
                 <xs:sequence>
-                    <xs:element name="arg0" type="xs:long"/>
-                    <xs:element name="arg1" type="tns:subscriber" minOccurs="0"/>
+                    <xs:element name="id" type="xs:long"/>
+                    <xs:element name="subscriber" type="tns:subscriber" minOccurs="0"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="updateSubsriberResponse">
                 <xs:sequence>
-                    <xs:element name="return" type="tns:subscriber" minOccurs="0"/>
+                    <xs:element name="subscriber" type="tns:subscriber" minOccurs="0"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="removeSubscriber">
                 <xs:sequence>
-                    <xs:element name="arg0" type="xs:long"/>
+                    <xs:element name="id" type="xs:long"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="removeSubscriberResponse">
@@ -58,12 +58,12 @@
             </xs:complexType>
             <xs:complexType name="getSubscriber">
                 <xs:sequence>
-                    <xs:element name="arg0" type="xs:long"/>
+                    <xs:element name="id" type="xs:long"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="getSubscriberResponse">
                 <xs:sequence>
-                    <xs:element name="return" type="tns:subscriber" minOccurs="0"/>
+                    <xs:element name="subscribers" type="tns:subscriber" minOccurs="0"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="getSubscribers">
@@ -71,7 +71,7 @@
             </xs:complexType>
             <xs:complexType name="getSubscribersResponse">
                 <xs:sequence>
-                    <xs:element name="return" type="tns:subscriber" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="subscriber" type="tns:subscriber" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:simpleType name="gender">
