@@ -23,13 +23,13 @@ public class SubscriberController {
     public String subscribers(Model model) {
         model.addAttribute("subscribers", subscriberService.findAll());
         model.addAttribute("idList", new ArrayList<Long>());
-        return "/subscriber/subscribers";
+        return "subscriber/subscribers";
     }
 
     @RequestMapping(value = "/subscriber/add", method = RequestMethod.GET)
     public String subscriberAddForm(Model model) {
         model.addAttribute("subscriberForm", new Subscriber());
-        return "/subscriber/subscriberAdd";
+        return "subscriber/subscriberAdd";
     }
 
     @RequestMapping(value = "/subscriber/add", method = RequestMethod.POST)
@@ -42,7 +42,7 @@ public class SubscriberController {
     @RequestMapping(value = "/subscriber/edit", method = RequestMethod.GET)
     public String subscriberEditForm(Model model, Long id) {
         model.addAttribute("subscriberForm", subscriberService.getById(id));
-        return "/subscriber/subscriberEdit";
+        return "subscriber/subscriberEdit";
     }
 
     @RequestMapping(value = "/subscriber/edit", method = RequestMethod.POST)
