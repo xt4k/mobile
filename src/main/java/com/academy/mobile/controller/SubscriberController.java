@@ -48,7 +48,7 @@ public class SubscriberController {
     @RequestMapping(value = "/subscriber/edit", method = RequestMethod.POST)
     // TODO check if exists
     public String editSubscriber(@ModelAttribute("subscriberForm") Subscriber subscriberForm, BindingResult bindingResult) {
-        subscriberService.save(subscriberForm);
+        subscriberService.saveById(subscriberForm.getId(), subscriberForm);
         return "redirect:/subscribers";
     }
 

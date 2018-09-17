@@ -6,11 +6,11 @@ import com.academy.mobile.model.Subscribers;
 import com.academy.mobile.service.db.SubscriberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.ws.rs.core.MediaType;
 import java.net.URI;
 
 @RestController
@@ -20,12 +20,12 @@ public class SubscriberServiceXML {
     @Autowired
     private SubscriberService subscriberService;
 
-    @GetMapping(produces = { MediaType.APPLICATION_XML })
+    @GetMapping(produces = { MediaType.APPLICATION_XML_VALUE })
     public Subscribers getSubscribers() {
         return new Subscribers(subscriberService.findAll());
     }
 
-    @GetMapping(path="/{id}", produces = { MediaType.APPLICATION_XML })
+    @GetMapping(path="/{id}", produces = { MediaType.APPLICATION_XML_VALUE })
     public Subscriber getSubscriber(@PathVariable long id) throws SubscriberNotFoundException {
         Subscriber subscriber = subscriberService.getById(id);
         if (subscriber != null)
@@ -34,7 +34,7 @@ public class SubscriberServiceXML {
         throw new SubscriberNotFoundException();
     }
 
-    @PostMapping(consumes = { MediaType.APPLICATION_XML })
+    @PostMapping(consumes = { MediaType.APPLICATION_XML_VALUE })
     public ResponseEntity<?> addSubscriber(@RequestBody Subscriber subscriber) {
         try {
             long id = subscriber.getId() == 0L ? subscriberService.save(subscriber).getId() :
@@ -49,7 +49,7 @@ public class SubscriberServiceXML {
         }
     }
 
-    @PutMapping(path= "/{id}", consumes = { MediaType.APPLICATION_XML })
+    @PutMapping(path= "/{id}", consumes = { MediaType.APPLICATION_XML_VALUE })
     public Subscriber updateSubscriber(@PathVariable("id") long id,  @RequestBody  Subscriber subscriber) {
         return subscriberService.saveById(id, subscriber);
     }
