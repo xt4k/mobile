@@ -12,7 +12,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 @Endpoint
 @CrossOrigin(origins = "*")
 public class SubscriberWSImpl  {
-
+/*
     private static final String NAMESPACE_URI = "http://soap.service.mobile.academy.com";
 
     @Autowired
@@ -107,5 +107,5 @@ public class SubscriberWSImpl  {
         converted.setGender(com.academy.mobile.model.Gender.valueOf(subscriber.getGender().toString().toLowerCase().charAt(0)));
 
         return converted;
-    }
+    }*/
 }

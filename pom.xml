@@ -17,6 +17,8 @@
     </parent>
 
     <properties>
+        <common.config>${basedir}/cfg/common.properties</common.config>
+        <datatable.config>${basedir}/cfg/datatable.properties</datatable.config>
         <!--<maven.compiler.source>1.8</maven.compiler.source>-->
         <!--<maven.compiler.target>1.8</maven.compiler.target>-->
 
@@ -28,9 +30,27 @@
         <!--<jetty.version>9.4.9.v20180320</jetty.version>-->
         <jersey.version>1.19.4</jersey.version>
         <json.version>20180130</json.version>
+
+        <poi.ooxml.version>4.0.1</poi.ooxml.version>
+        <selenium.version>3.14.0</selenium.version>
+        <testng.version>7.0.0-beta4</testng.version>
+        <log4j.version>2.11.1</log4j.version>
+        <json.simple.version>1.1.1</json.simple.version>
+        <xstream.version>1.4.10</xstream.version>
+        <rest.assured.version>3.1.1</rest.assured.version>
+        <mysql.version>8.0.15</mysql.version>
+
     </properties>
 
     <dependencies>
+
+        <!-- Framework -->
+        <dependency>
+            <groupId>com.academy</groupId>
+            <artifactId>taf</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -91,7 +111,81 @@
             <artifactId>json</artifactId>
             <version>${json.version}</version>
         </dependency>
+
+        <!--dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.0.0-beta4</version>
+        </dependency-->
+
+        <!--Selenium-->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <!--Excel-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.ooxml.version}</version>
+        </dependency>
+
+        <!--TestNG-->
+        <!---dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+        </dependency-->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.15</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.0.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.0.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.21.0</version>
+                <configuration>
+                    <systemProperties>
+                        <property>
+                            <name>common.cfg</name>
+                            <value>${common.config}</value>
+                            <!--<value>D:/programming/java/QA-JA-06/maven/src/main/resources/common.properties</value>-->
+                            <!--<value>${basedir}/src/main/resources/common.properties</value>-->
+                        </property>
+
+                        <property>
+                            <name>datatable.cfg</name>
+                            <value>${datatable.config}</value>
+                        </property>
+
+
+                    </systemProperties>
+                    <!--Путь к конфигурации testng.xml-->
+                    <suiteXmlFiles>
+                        <suiteXmlFile>suits/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <profiles>
         <profile>
